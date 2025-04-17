@@ -12,7 +12,7 @@ from azure.cli.core.aaz import *
 
 
 @register_command(
-    "managed-identity user-assigned-identity create",
+    "identity create",
 )
 class Create(AAZCommand):
     """Create an identity in the specified subscription and resource group.
@@ -197,12 +197,32 @@ class Create(AAZCommand):
             _schema_on_200_201.name = AAZStrType(
                 flags={"read_only": True},
             )
+            _schema_on_200_201.properties = AAZObjectType(
+                flags={"client_flatten": True, "read_only": True},
+            )
             _schema_on_200_201.system_data = AAZObjectType(
                 serialized_name="systemData",
                 flags={"read_only": True},
             )
             _schema_on_200_201.tags = AAZDictType()
             _schema_on_200_201.type = AAZStrType(
+                flags={"read_only": True},
+            )
+
+            properties = cls._schema_on_200_201.properties
+            properties.client_id = AAZStrType(
+                serialized_name="clientId",
+                flags={"read_only": True},
+            )
+            properties.isolation_scope = AAZStrType(
+                serialized_name="isolationScope",
+            )
+            properties.principal_id = AAZStrType(
+                serialized_name="principalId",
+                flags={"read_only": True},
+            )
+            properties.tenant_id = AAZStrType(
+                serialized_name="tenantId",
                 flags={"read_only": True},
             )
 
