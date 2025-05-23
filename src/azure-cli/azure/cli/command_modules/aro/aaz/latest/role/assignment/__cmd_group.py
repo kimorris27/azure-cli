@@ -8,3 +8,16 @@
 # pylint: skip-file
 # flake8: noqa
 
+from azure.cli.core.aaz import *
+
+
+@register_command_group(
+    "role assignment",
+)
+class __CMDGroup(AAZCommandGroup):
+    """Manage Role Assignment
+    """
+    pass
+
+
+__all__ = ["__CMDGroup"]
